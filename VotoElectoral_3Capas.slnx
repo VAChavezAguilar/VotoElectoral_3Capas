@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ProySisElectoral_ADO/ProySisElectoral_ADO.csproj" />
+  <Project Path="ProySisElectoral_BE/ProySisElectoral_BE.csproj" />
+  <Project Path="ProySisElectoral_BL/ProySisElectoral_BL.csproj" />
+  <Project Path="ProySisElectoral_GUI/ProySisElectoral_GUI.csproj" />
+</Solution>
