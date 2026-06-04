@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Data;
 using Microsoft.Data.SqlClient;
 using ProySisElectoral_BE;
@@ -10,7 +10,7 @@ namespace ProySisElectoral_ADO
         public DataTable ListarCandidato()
         {
             DataTable dt = new DataTable();
-            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaVentas))
+            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaConexion))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_ListarCandidatos", cnx))
                 {
@@ -27,7 +27,7 @@ namespace ProySisElectoral_ADO
 
         public bool InsertarCandidato(CandidatoBE obj)
         {
-            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaVentas))
+            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaConexion))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_InsertarCandidato", cnx))
                 {
@@ -48,16 +48,20 @@ namespace ProySisElectoral_ADO
 
         public bool ActualizarCandidato(CandidatoBE obj)
         {
-            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaVentas))
+            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaConexion))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_ActualizarCandidato", cnx))
                 {
                     cmd.CommandType = CommandType.StoredProcedure;
+
                     cmd.Parameters.AddWithValue("@id_candidato", obj.id_candidato);
                     cmd.Parameters.AddWithValue("@nombres", obj.nombres);
                     cmd.Parameters.AddWithValue("@apellidos", obj.apellidos);
                     cmd.Parameters.AddWithValue("@id_partido", obj.id_partido);
-                    // ... añade aquí el resto de parámetros igual al Insertar ...
+                    cmd.Parameters.AddWithValue("@id_eleccion", obj.id_eleccion);
+                    cmd.Parameters.AddWithValue("@sexo", obj.sexo);
+                    cmd.Parameters.AddWithValue("@direccion", obj.direccion);
+                    cmd.Parameters.AddWithValue("@Id_Ubigeo", obj.Id_Ubigeo);
 
                     cnx.Open();
                     return cmd.ExecuteNonQuery() > 0;
@@ -70,7 +74,7 @@ namespace ProySisElectoral_ADO
             var objCandidatoBE = new CandidatoBE();
             try
             {
-                using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaVentas))
+                using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaConexion))
                 {
                     using (SqlCommand cmd = new SqlCommand("usp_ConsultarCandidato", cnx))
                     {
@@ -103,7 +107,7 @@ namespace ProySisElectoral_ADO
 
         public bool EliminarCandidato(Int32 id)
         {
-            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaVentas))
+            using (SqlConnection cnx = new SqlConnection(Configuracion.CadenaConexion))
             {
                 using (SqlCommand cmd = new SqlCommand("sp_EliminarCandidato", cnx))
                 {
