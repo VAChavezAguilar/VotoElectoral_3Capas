@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.IO;
 
@@ -32,15 +32,15 @@ namespace ProySisElectoral_ADO
         }
 
         // Propiedad para obtener la cadena de conexión
-        public static string CadenaVentas
+        public static string CadenaConexion
         {
             get
             {
                 // Buscamos dentro de la sección "ConnectionStrings"
-                string cadena = _config.GetConnectionString("Ventas");
+                string cadena = _config.GetConnectionString("Elecciones");
 
                 if (string.IsNullOrEmpty(cadena))
-                    throw new Exception("No se encontró la cadena 'VentasLeon' en appsettings.json");
+                    throw new Exception("No se encontró la cadena 'Elecciones' en appsettings.json");
 
                 return cadena;
             }
