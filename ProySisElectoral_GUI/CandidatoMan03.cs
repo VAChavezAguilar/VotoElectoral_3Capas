@@ -31,7 +31,7 @@ namespace ProySisElectoral_GUI
 
                 // Filtramos por el ID. ¡OJO! Asegúrate que "id_candidato" sea el nombre 
                 // exacto de la columna en tu DataTable.
-                DataRow[] filas = dtTodos.Select("id_candidato = " + idCandidato);
+                DataRow[] filas = dtTodos.Select($"id_candidato = {Convert.ToInt32(idCandidato)}");
 
                 if (filas.Length > 0)
                 {
